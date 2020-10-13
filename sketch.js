@@ -1,3 +1,7 @@
+// Project_C27: Newton's Cradle
+// Conservation of momentum and energy using a series of swinging spheres (Bobs)
+
+//Namespacing
 
 const Engine = Matter.Engine;
 const World = Matter.World;
@@ -6,6 +10,7 @@ const Body = Matter.Body;
 const Render = Matter.Render;
 const Constraint = Matter.Constraint;
 
+//Creating Variables
 var roof_Obj;
 var bob_Dia;
 var bob_Obj1, bob_Obj2, bob_Obj3, bob_Obj4, bob_Obj5;
@@ -19,9 +24,10 @@ function setup() {
 	engine = Engine.create();
 	world = engine.world;
 
-	//Create the Bodies Here.
+	//Roof
 	roof_Obj = new Roof(width/2,200,240,25);
-
+	
+	//Bobs
 	bob_Obj1 = new Bob(700, 700, 40);
 	bob_Obj2 = new Bob(750, 700, 40);
 	bob_Obj3 = new Bob(800, 700, 40);
@@ -32,6 +38,8 @@ function setup() {
 
 	
 	console.log(bob_Obj1.body);
+	
+	//Rope
 
 	rope_Obj1 = new Rope(bob_Obj1.body, roof_Obj.body, -(bob_Dia * 3), 0);
 	rope_Obj2 = new Rope(bob_Obj2.body, roof_Obj.body, -(bob_Dia * 1.5), 0);
@@ -47,6 +55,7 @@ function draw() {
   rectMode(CENTER);
   background(205, 189, 255);
   
+  //Display Objects
   roof_Obj.display();
   bob_Obj1.display();
   bob_Obj2.display();
@@ -61,6 +70,7 @@ function draw() {
   rope_Obj5.display();
 }
 
+//Apply force when up arrow key is pressed
 function keyPressed() {
 	if (keyCode === UP_ARROW) {
 	  Matter.Body.applyForce(bob_Obj1.body,bob_Obj1.body.position,{x:-50,y:-45});
